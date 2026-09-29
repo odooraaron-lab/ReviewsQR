@@ -5,11 +5,11 @@ const nextConfig = {
   // The sign renderer reads its fonts and native PNG renderer at request time.
   serverExternalPackages: ['pdfkit', 'fontkit', 'svg-to-pdfkit', '@resvg/resvg-js'],
   outputFileTracingIncludes: {
-    '/api/**/*': ['./fonts/**/*'],
-    '/examples/**/*': ['./fonts/**/*'],
-    '/order/**/*': ['./fonts/**/*'],
-    '/opengraph-image': ['./fonts/**/*'],
-    '/done': ['./fonts/**/*'],
+    '/api/**/*': ['./fonts/**/*', './node_modules/pdfkit/js/data/**/*'],
+    '/examples/**/*': ['./fonts/**/*', './node_modules/pdfkit/js/data/**/*'],
+    '/order/**/*': ['./fonts/**/*', './node_modules/pdfkit/js/data/**/*'],
+    '/opengraph-image': ['./fonts/**/*', './node_modules/pdfkit/js/data/**/*'],
+    '/done': ['./fonts/**/*', './node_modules/pdfkit/js/data/**/*'],
   },
   async headers() {
     return [{

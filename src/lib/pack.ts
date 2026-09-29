@@ -4,7 +4,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { renderSign } from './sign';
 import { qrStandaloneSvg } from './qr';
 import { getDesign } from './designs';
-import { text } from './fonts';
+import { text, measure } from './fonts';
 import { BRAND, PRODUCT } from './config';
 import type { SignInput } from './options';
 
@@ -95,12 +95,12 @@ export async function renderPack(input: SignInput): Promise<Buffer> {
     ${text('Add it to menus, receipts, flyers, business cards and your own designs.', { font: 'Nunito_600SemiBold', size: 24, x: 500, y: 1080, fill: '#374151', align: 'center' })}
     ${text('Print it at least 2.5 cm wide. Bigger is better for walls and windows.', { font: 'Nunito_600SemiBold', size: 24, x: 500, y: 1122, fill: '#374151', align: 'center' })}
     ${text('Keep the white border around the code, and dark code on a light background.', { font: 'Nunito_600SemiBold', size: 24, x: 500, y: 1164, fill: '#374151', align: 'center' })}
+    ${text(`Links to: ${input.url}`, { font: 'Nunito_600SemiBold', size: Math.min(16, 16 * 900 / Math.max(1, measure(`Links to: ${input.url}`, 'Nunito_600SemiBold', 16))), x: 500, y: 1240, fill: '#6B7280', align: 'center' })}
     ${text(`Design: ${d.name}`, { font: 'Nunito_600SemiBold', size: 20, x: 500, y: 1290, fill: '#9CA3AF', align: 'center' })}
   </svg>`;
   svg(note, 0, 0, A4.w, A4.h);
   const qrW = 130 * MM;
   svg(qrStandaloneSvg(input.url, 1000), (A4.w - qrW) / 2, 58 * MM, qrW, qrW);
-  doc.save().fillColor('#6B7280').font('Helvetica').fontSize(8).text(`Links to: ${input.url}`, 20 * MM, 256 * MM, { width: A4.w - 40 * MM, align: 'center' }).restore();
 
   doc.end();
   return done;

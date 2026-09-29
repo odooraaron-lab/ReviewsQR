@@ -23,7 +23,13 @@ export async function GET(_req: Request, ctx: { params: Promise<{ token: string;
   }
   if (!isFileId(file)) return new Response('Not found', { status: 404 });
 
-  const body = await renderFile(file, signInput(o));
+  let body: Buffer;
+  try {
+    body = await renderFile(file, signInput(o));
+  } catch (e) {
+    console.error('file render failed', file, o.id, e);
+    return new Response('Sorry, this file couldn’t be made just now. Please try again in a minute, or reply to your order email.', { status: 500, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+  }
   await countDownload(o.id).catch(() => {});
   return new Response(new Uint8Array(body), {
     headers: {
