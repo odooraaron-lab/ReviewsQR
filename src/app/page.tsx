@@ -20,7 +20,7 @@ const FAQ: [string, string][] = [
   ['What do I get for $5.99?', 'A print-ready PDF with an A4 poster, two A5 table signs and four A6 counter cards, the QR code on its own for your own designs, a 1920 × 1080 TV slide, a high-res sign image and the QR code as PNG and SVG. You can download them straight away and we email you a copy.'],
   ['Do I need to sign up or subscribe?', 'No. There’s no account and no subscription. You pay once and keep your files forever.'],
   ['Will the QR code ever stop working?', 'No. It’s a static QR code: it opens your Google review form directly, with no redirect through us. It works for as long as your Google Business Profile does.'],
-  ['Can I test the QR code before I pay?', 'Yes. The live preview uses your real link, so you can scan it with your phone to check it opens your review page.'],
+  ['Can I test my link before I pay?', 'Yes. Tap “Test my link” on the order form and it opens exactly the page your QR code will open. The preview shows a sample code; your own code is on your download.'],
   ['What if I make a typo?', 'You can change the wording, design or link yourself for 7 days after you pay, from your download page. Free.'],
   ['How do I print it?', 'Print the PDF at 100% (actual size) on A4 paper or card, at home or at any print shop. Matte lamination or a clear acrylic stand makes it last.'],
   ['Can I show it on a TV?', 'Yes. Every pack includes a 1920 × 1080 TV slide. It’s made to work with myQR Digital Signage, and any screen that shows images.'],
@@ -72,7 +72,7 @@ export default function Home() {
             <div>
               <span className="eyebrow"><Icon name="sparkle" size={16} /> Live preview</span>
               <h2>Create your review sign</h2>
-              <p className="muted">Type your details and watch the sign change. Scan the preview with your phone to test your link before you pay.</p>
+              <p className="muted">Type your details and watch the sign change. Tap “Test my link” to check your review link before you pay.</p>
             </div>
           </div>
           <Creator designs={designs} price={PRICE_LABEL} placesEnabled={!!process.env.GOOGLE_PLACES_API_KEY} />

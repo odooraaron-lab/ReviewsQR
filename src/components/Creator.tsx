@@ -71,15 +71,15 @@ export function Creator({ designs, price, placesEnabled, initialDesign, initialH
   useEffect(() => {
     setLoading(true);
     const t = setTimeout(() => {
-      const q = new URLSearchParams({ b: business, h: headline, t: thanks, u: cleanUrl || '', d: design, o: orientation });
+      const q = new URLSearchParams({ b: business, h: headline, t: thanks, d: design, o: orientation });
       setSrc(`/api/preview?${q}`);
     }, 320);
     return () => clearTimeout(t);
-  }, [business, headline, thanks, cleanUrl, design, orientation]);
+  }, [business, headline, thanks, design, orientation]);
 
   const urlStatus = !url.trim() ? null
     : !cleanUrl ? { cls: 'bad', text: 'That doesn’t look like a web address yet.' }
-    : looksLikeGoogle(cleanUrl) ? { cls: 'ok', text: 'Looks like a Google link. Scan the preview to check it opens your review page.' }
+    : looksLikeGoogle(cleanUrl) ? { cls: 'ok', text: 'Looks like a Google link. Tap “Test my link” to check it opens your review page.' }
     : { cls: 'warn', text: 'This isn’t a Google link. That’s fine if it’s where you want reviews (e.g. TripAdvisor).' };
 
   async function submit(e: React.FormEvent) {
@@ -130,6 +130,7 @@ export function Creator({ designs, price, placesEnabled, initialDesign, initialH
               <span className={`status ${urlStatus.cls}`}><Icon name={urlStatus.cls === 'ok' ? 'check' : 'bolt'} size={16} />{urlStatus.text}</span>
             )}
           </div>
+          {cleanUrl && <a className="btn ghost small" style={{ alignSelf: 'flex-start' }} href={cleanUrl} target="_blank" rel="noopener noreferrer">Test my link ↗</a>}
           <details className="howto">
             <summary>How do I find my review link?</summary>
             <ol>
@@ -174,7 +175,7 @@ export function Creator({ designs, price, placesEnabled, initialDesign, initialH
           )}
           <span className="spin" aria-hidden="true" />
         </div>
-        <p className="preview-note"><Icon name="camera" size={18} /> <span>Scan the preview with your phone to test your link. The “preview” watermark isn’t on your download.</span></p>
+        <p className="preview-note"><Icon name="camera" size={18} /> <span>Your own QR code is added when you pay. The preview uses a sample code and a watermark, which aren’t on your download.</span></p>
       </div>
 
       <fieldset className="panel g-c">

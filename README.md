@@ -8,7 +8,8 @@ plus a copy by email. Live at `reviews.myqr.co.nz`.
 
 1. **Order form** (home page `#create`, and every `/for/<industry>` page): business name, review link,
    design, headline, sign-off, email. The live preview (`/api/preview`) is drawn by the real renderer,
-   watermarked, with a **real, scannable QR code** so people can test their link before paying.
+   a low-resolution, heavily watermarked PNG with a **sample** QR code (it opens this site), so it can't be
+   used as a free sign. "Test my link" opens the customer's link so they can check it before paying.
 2. **Pay:** `/api/checkout` saves a pending order and opens Stripe Checkout
    (`metadata: { product: 'reviews', site_slug: <order id> }`).
 3. **Fulfil:** Stripe calls `/api/stripe/webhook` → the order is marked paid, the print pack is emailed
